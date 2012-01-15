@@ -11,8 +11,7 @@ body
     font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
     font-size: 14px;
     height: 20%;
-	background-image: url(IMG_1002.jpg); 
-	background-attachment: fixed;
+    background: url(img_0999.jpg);
     color: #FFFF66;
     text-align: center;
 }

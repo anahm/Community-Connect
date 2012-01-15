@@ -21,24 +21,7 @@ var allFeed =
 	},
     };
 
-
- var tempFeed2 = {
-        url: 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/?squery=cambridge',
-        color: '#4793E6',
-        textColor: 'black'
-    };
-
-var qFeed = 
-    {
-        url: 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/?squery=cambridge',
-        color: '#4793E6',
-        textColor: 'black',
-	type: 'POST',
-	error: function()
-	{
-	    alert('sooooooooory');
-	},
-    };
+var currentFeed = allFeed;
 
 $(document).ready(function()
 {
@@ -82,7 +65,22 @@ $(document).ready(function()
 function searchEvents()
 {
     var qString = document.qform.squery.value;
-    $('#calendar').fullCalendar( 'removeEventSource', allFeed);
-    $('#calendar').fullCalendar( 'addEventSource', tempFeed2);
-    $('#calendar').fullCalendar( 'refetchEvents' );
+    var tempFeed = 
+	{
+            url: 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/',
+	    type: 'GET',
+	    data:
+		{
+		    squery: qString
+		}, 
+            color: '#4793E6',
+            textColor: 'black'
+        };
+
+    $('#calendar').fullCalendar('removeEventSource', currentFeed);
+    $('#calendar').fullCalendar('addEventSource', tempFeed);
+    $('#calendar').fullCalendar('refetchEvents');
+
+    document.qform.squery.value = "";
+    currentFeed = tempFeed;
 }
