@@ -24,7 +24,7 @@
 
 	<table id='header'>
 	    <th>
-		oh hello there 
+		Welcome (insert group name)!
 	    </th>
 	</table>
 
@@ -33,23 +33,23 @@
 		<input type="hidden" name="groupID" value="WILLHOLDGROUPIDNUMBER"> 
 		<table> 
 		    <th>
-			<td colspan="2">this is the sidebar of whatnot.</td>
+			<td colspan="2">ADD EVENT</td>
 		    </th>
 		    <tr> 
-			<td>Ze Name:</td> 
+			<td>Name:</td> 
 			<td><input name="name" type="text"></td> 
 		    </tr>
 		    <tr>
-			<td>Date (not the fruit):</td>
+			<td>Date:</td>
 			<!-- should probably make this into a jquery datepicker -->
 			<td><input name="date" type="text"></td>
 		    </tr>
 		    <tr>
-			<td>Where The Party's At:</td>
+			<td>Location:</td>
 			<td><input name="location" type="text"></td>
 	 	    </tr>
 		    <tr>
-			<td>A Que Hora?</td>
+			<td>Time:</td>
 			<!-- could also make this better with jquery -->
 			<td><input name="time" type="text"></td> 
 		    </tr>
@@ -72,7 +72,7 @@
 	</div>
 
 	<div id='lowerleft'>
-	    <form name="qform" action="" method="GET">
+	    <form name="qform" onsubmit="searchEvents()">
 		<table>
 		    <tr>
 			<td>I want a calendar that has:</td>
@@ -80,7 +80,7 @@
 		    </tr>
 		    <tr>
 			<td colspan="2">
-			    <input type="button" name="button" value="SEARCH" onClick="searchEvents(this.qform)">
+			    <input type="submit" value="SEARCH">
 			</td>
 		    </tr>
 		</table>

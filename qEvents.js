@@ -9,23 +9,21 @@
  * calendar's events)
  */
 
-function searchEvents (form)
+function searchEvents()
 {
     var qString = document.qform.squery.value;
-    var newUrl = 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/?sQuery=' . qString;
-alert(newUrl);
     $('#calendar').fullCalendar(
     {
 	// php projectx data
 	eventSources:
 	[
 	    {
-		url: 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/',
-		type: 'GET',
+		url: 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/?squery=cambridge',
+		type: 'POST', /*
 		data:
 		{
-		    sQuery: qString
-		},
+		    squery: qString,
+		},*/
 		error: function()
 		{
 		    alert('fail status. sorry, man.');
