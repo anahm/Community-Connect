@@ -11,15 +11,18 @@ body
     font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
     font-size: 14px;
     height: 20%;
-    background: #FF3333;
+	background-image: url(IMG_1002.jpg); 
+	background-attachment: fixed;
     color: #FFFF66;
     text-align: center;
 }
 
 div#header
 {
-    height: 20%;
+    height: 200%;
     width: 100%;
+    
+    
 }
 
 table#header
@@ -30,6 +33,10 @@ table#header
     margin-right: auto;
     background: #5C9DBD;
     width: 20%;
+    padding-top:2000px;
+	padding-bottom:2000px;
+	padding-right:2000px;
+	padding-left:2000px;
 }
 
 th

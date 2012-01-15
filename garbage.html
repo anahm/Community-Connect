@@ -6,6 +6,7 @@ HELLO PEOPLE THIS IS ALI AND SURY DOING WEIRD THINGS...BLARGL
     <head>
 	<title>SODAASN</title>
 	<link rel="stylesheet" href="css/styles.css" type="text/css">
+	<script type='text/javascript' src='qEvents.js'></script>
 
    </head>
 
@@ -29,6 +30,21 @@ HELLO PEOPLE THIS IS ALI AND SURY DOING WEIRD THINGS...BLARGL
 	    <br>
 	    <button onclick="addEvent.js">ADD!</button>
 	</form> 
+
+	    <form name="qform" onsubmit="searchEvents()" method="POST">
+                <table>
+                    <tr>
+                        <td>I want a calendar that has:</td>
+                        <td><input name="squery" type="text"/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="SEARCH"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
 
 	<div id="header">
 	    <table id="header">

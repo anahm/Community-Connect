@@ -16,7 +16,6 @@
    
     $query->setUser('default');
     $query->setVisibility('private');
-    $query->setProjection('basic');
     $query->setOrderby('starttime');
 
     $query->setQuery($_GET['squery']);

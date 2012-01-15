@@ -10,7 +10,6 @@
 	<script type='text/javascript' src='fullcal/testcal.js'></script>
 
 	<script type='text/javascript' src='events.js'></script>
-	<script type='text/javascript' src='qEvents.js'></script>
 
 	<title>
 	    SODAASN (+ scott)
@@ -72,7 +71,7 @@
 	</div>
 
 	<div id='lowerleft'>
-	    <form name="qform" onsubmit="searchEvents()">
+	    <form name="qform" onsubmit="searchEvents()" method="POST">
 		<table>
 		    <tr>
 			<td>I want a calendar that has:</td>
@@ -80,7 +79,7 @@
 		    </tr>
 		    <tr>
 			<td colspan="2">
-			    <input type="submit" value="SEARCH">
+			    <input type="submit" name="button" value="SEARCH">
 			</td>
 		    </tr>
 		</table>

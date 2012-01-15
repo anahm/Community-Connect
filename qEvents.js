@@ -12,41 +12,35 @@
 function searchEvents()
 {
     var qString = document.qform.squery.value;
+    var tempFeed = {
+	url: 'http://www.hcs.harvard.edu/projectx/hidden/allEvents.php',
+    };
+    $('#calendar').fullCalendar( 'removeEventSource', tempFeed);
+    var tempFeed2 = {
+	url: 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/?squery=cambridge',
+	color: '#4793E6',
+	textColor: 'black'
+    };
+
+    $('#calendar').fullCalendar( 'addEventSource', tempFeed2);
+
+
+    $('#calendar').fullCalendar( 'refetchEvents' );
+/*
     $('#calendar').fullCalendar(
     {
 	// php projectx data
 	eventSources:
 	[
 	    {
-		url: 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/?squery=cambridge',
-		type: 'POST', /*
-		data:
-		{
-		    squery: qString,
-		},*/
+//		url: 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/?squery=cambridge',
+		url: 'http://www.hcs.harvard.edu/projectx/hidden/allEvents.php',
+		type: 'POST', 
 		error: function()
 		{
-		    alert('fail status. sorry, man.');
+		    alert('failblog.');
 		},
 	    }
 	]
-/* extra stuff i don't really get.. 
-	eventClick: function(event)
-	{
-	    // opens events in a popup window
-	    window.open(event.url, 'gcalevent', 'width=700, height=600');
-	},
-
-	loading: function(bool)
-	{
-	    if (bool)
-	    {
-		$('#loading').show();
-	    }
-	    else
-	    {
-		$('#loading').hide();
-	    }
-	} */
-    });
+   }); */
 }
