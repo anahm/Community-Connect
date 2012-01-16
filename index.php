@@ -1,14 +1,10 @@
-<?
-    require_once('hidden/basic.php');
-?>
-
 <!DOCTYPE html>
 
 <html>
 
     <head>
 	<link rel='stylesheet' type='text/css' href='fullcal/cal.css'/>
-	<link rel='stylesheet' type='text/css' href='css/styles2.css' />
+	<link rel='stylesheet' type='text/css' href='css/styles.css' />
 	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
 	<script type='text/javascript' src='fullcal/testcal.js'></script>
 
@@ -21,9 +17,15 @@
     </head>
 
     <body>
-	<div id='header'>
-   	    Welcome (insert group name)!
+	<div id='loading' style='display:none'>
+	    loading...
 	</div>
+
+	<table id='header'>
+	    <th>
+		Welcome (insert group name)!
+	    </th>
+	</table>
 
 	<div id="addEvent">
 	    <form name="newEvent" onsubmit="addEvent(); return false;" action="">
@@ -58,10 +60,35 @@
 			<td>Which calendar to add to?</td>
 			<td>
 			    <select name="caldropdown">
-				<option>All Calendars You Can Add To</option>
 			    <?
-				// need to get sql information
-   			    ?>
+echo("<option>hello world</option>");
+
+require_once 'Zend/Loader.php';
+   Zend_Loader::loadClass('Zend_Gdata');
+    Zend_Loader::loadClass('Zend_Gdata_AuthSub');
+    Zend_Loader::loadClass('Zend_Gdata_ClientLogin');
+    Zend_Loader::loadClass('Zend_Gdata_Calendar');
+
+    // ClientLogin username/password authentication
+    $user = 'alison.nahm@gmail.com';
+    $pass = 'wobble31';
+    $service = Zend_Gdata_Calendar::AUTH_SERVICE_NAME; // predefined service name for calendar
+    $client = Zend_Gdata_ClientLogin::getHttpClient($user, $pass, $service);
+
+
+echo("<option>hello world</option>");
+				// create new entry using calendar
+				$service = new Zend_Gdata_Calendar($client);
+				$calFeed = $gdataCal->getCalendarListFeed();
+	
+				foreach ($calFeed as $calendar)
+				{
+				    $title = $calendar->title->text;
+				    print("<option>");
+				    print($title);
+				    print("</option>");
+				}
+    			    ?>
 			    </select>
 			</td>	
 		    </tr>

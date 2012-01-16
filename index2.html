@@ -1,7 +1,3 @@
-<?
-    require_once('hidden/basic.php');
-?>
-
 <!DOCTYPE html>
 
 <html>
@@ -9,11 +5,11 @@
     <head>
 	<link rel='stylesheet' type='text/css' href='fullcal/cal.css'/>
 	<link rel='stylesheet' type='text/css' href='css/styles2.css' />
-	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
+	<script type='text/javascript' src='jquery/jquery-1.5.2.min.js'></script>
+	<script type='text/javascript' src='query/jquery-ui-1.8.11.custom.min.js'></script>
 	<script type='text/javascript' src='fullcal/testcal.js'></script>
 
 	<script type='text/javascript' src='events.js'></script>
-	<script type='text/javascript' src='post.js'></script>
 
 	<title>
 	    SODAASN (+ scott)
@@ -21,12 +17,13 @@
     </head>
 
     <body>
+
 	<div id='header'>
-   	    Welcome (insert group name)!
+		Welcome (insert group name)!
 	</div>
 
 	<div id="addEvent">
-	    <form name="newEvent" onsubmit="addEvent(); return false;" action="">
+	    <form action="hidden/addEvent.php" method="POST">
 		<input type="hidden" name="groupID" value="WILLHOLDGROUPIDNUMBER"> 
 		<table> 
 		    <th>
@@ -55,17 +52,6 @@
 			<td><input name="blurb" type="text"></td>
 		    </tr>
 		    <tr>
-			<td>Which calendar to add to?</td>
-			<td>
-			    <select name="caldropdown">
-				<option>All Calendars You Can Add To</option>
-			    <?
-				// need to get sql information
-   			    ?>
-			    </select>
-			</td>	
-		    </tr>
-		    <tr>
 			<td>Any tags?</td>
 			<td>Well too bad, because you can't tag right now.</td>
 		    </tr>
@@ -80,7 +66,7 @@
 	</div>
 
 	<div id='lowerleft'>
-	    <form name="qform" onsubmit="searchEvents(); return false;"  action="">
+	    <form name="qform" onsubmit="searchEvents()" method="POST">
 		<table>
 		    <tr>
 			<td>I want a calendar that has:</td>
@@ -94,24 +80,6 @@
 		</table>
 	    </form>
 	</div>
-
-	<div>
-	    <form name="newCal" onsubmit="addCal(); return false;" action="">
-		<input name="userID" type="hidden" value="useridneedstogohere">
-		<table>
-		    <tr>
-			<th colspan="2">Make-Your-Own</th>
-		    </tr>
-		    <tr>
-			<td>Calendar Name:</td>
-			<td><input name="calName" type="text" value=""></td>
-		    </tr>
-		    <tr>
-			<td colspan="2"><input type="submit" name="button" value="MAKE"></td>
-		    </tr>
-		</table>
-	    </form>
-	</div> 
 
     </body>
 
