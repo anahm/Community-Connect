@@ -68,8 +68,7 @@
 
     function apologize($message)
     {
-        print($message); 
-        
+        require_once("apology.php"); 
 
         // exit immediately since we're apologizing
         exit;

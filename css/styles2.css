@@ -10,7 +10,7 @@ body
 {
     font-family: "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
     font-size: 14px;
-    background-image: url('../images/BetterFlower.jpg');
+    background-image: url('../images/IMG_0926.JPG');
 	background-size: 100%;
     color: #FFFF66;
     text-align: center;
@@ -29,20 +29,19 @@ div#home
 {
 	font-family: Calibri, Verdana, Ariel, sans-serif;
 	font-size: 24px;
-	color: #FF6600;
+	color: #484A4C;
 	width: 100%;
-	background-color: #000000;
 	text-align: left;
-	border: 
 }
 
 div#header
 {
-    font-family: ‘Ubuntu’, arial, serif;
+    font-family: 'Ubuntu', arial, serif;
     font-size: 50px;
-	color: #000000;
-    background-color: #CCE680;
+	color: #FFFFFF;
+    background-color: #969696;
     width: 100%;
+	border: 3px solid #E6E6E6;
 }
 
 div#addEvent
@@ -56,7 +55,7 @@ div#addEvent
 
 div#right
 {
-	float: right;
+	text-align: center;
 }
 
 div#calendar
@@ -64,8 +63,6 @@ div#calendar
 	background-color: #FFFFFF;
 	color: #000000;
 }
-
-
 
 div#lowerleft
 {

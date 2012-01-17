@@ -5,12 +5,6 @@
 
     // retrieving events without query parameters
     $gdataCal = new Zend_Gdata_Calendar($client);
-// NEED TO ITERATE THROUGH ALL POSSIBLE IDS!!!!
-    $query = $gdataCal->newEventQuery();
-    $query->setUser($id . '@group.calendar.google.com');
-    $query->setVisibility('private');
-    $query->setOrderby('starttime');
-
     $eventFeed = $gdataCal->getCalendarEventFeed();
 
     $event_array = array();
@@ -36,3 +30,4 @@
     echo json_encode($event_array);
 
 ?>
+

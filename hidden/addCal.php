@@ -9,6 +9,8 @@
 	(based on stackoverflow.com/questions/1424373/google-calendar-api-selecting-creating-calendars)
     */
 
+    header('Content-Type:application/json');
+
     require_once('extraLogin.php');
 
     // standard creation of http client
@@ -36,17 +38,48 @@
 	}
     }
 
+    $cal_array = array();
+
     // if name not found, create calendar
     if ($noCal)
     {
-	$appCal = $gdataCal->newListEntry();
-	$appCal->title = $gdataCal->newTitle($newName);
+	$newCal = $gdataCal->newListEntry();
+	$newCal->title = $gdataCal->newTitle($newName);
 
 	// new url to post for new calendars
 	$own_cal = "http://www.google.com/calendar/feeds/default/owncalendars/full";
 
-	$gdataCal->insertEvent($appCal, $own_cal);
-    }
+	$bestCal = $gdataCal->insertEvent($newCal, $own_cal);
 
-    header("Location: http://www.hcs.harvard.edu/projectx");
+	$pattern = '/(?<=http:\/\/www.google.com\/calendar\/feeds\/default\/owncalendars\/full\/)(.*)(\%40group.calendar.google.com)/';
+	$output = $bestCal->id->text;
+	$tempId_array = array();
+	preg_match_all($pattern, $output, $tempId_array);
+	$calID = $tempId_array[1][0];
+
+	// code to add the cal info to the calendars mysql table
+	require_once('basic.php');
+	$calName = mysql_real_escape_string($newName);
+	$calResult = mysql_query("INSERT INTO calendars (calName, gcalID)
+		VALUES ('$calName', '$calID')");
+	
+	if (!$calResult)
+	    apologize("sorry folks, can't add this calendar to the sql table.");	 
+
+	// code to add to writers table
+	$uID = $_SESSION["id"];
+
+	// need to get the sql stored calendar id
+	$tempResult = mysql_query("SELECT calID FROM calendars WHERE calName='$calName'");
+	if (mysql_num_rows($tempResult) == 1)
+	{
+	    $row = mysql_fetch_array($tempResult);
+	    $sqlCalID = $row['calID'];  
+	    $writeResult = mysql_query("INSERT INTO writers (userID, calID)
+		VALUES ('$uID', '$sqlCalID')");	
+
+	    if ($writeResult)
+	    	apologize("sorry folks, can't add this calendar to writers sql table.");
+	}
+    }
 ?> 

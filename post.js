@@ -8,8 +8,16 @@
 function addCal()
 {
     var newName = document.newCal.calName.value;
-    $.post("http://www.hcs.harvard.edu/projectx/hidden/addCal.php", {calName: newName} );
+    $.post("http://www.hcs.harvard.edu/projectx/hidden/addCal.php", {calName: newName}, function(data)
+	{
+	    var tempCrap = JSON.stringify(data);
+	    alert(tempCrap);
+	});
+
+    
     document.newCal.calName.value = "";
+
+    
 }
 
 function addEvent()
