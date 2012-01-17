@@ -10,7 +10,7 @@
 <html>
 
   <head>
-    <link href="css/styles2.css" rel="stylesheet" type="text/css">
+    <link href="css/loginStyle.css" rel="stylesheet" type="text/css">
     <title>Project X | Login</title>
   </head>
 

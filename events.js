@@ -12,7 +12,7 @@
 var allFeed = 
     {
     	url: 'http://www.hcs.harvard.edu/projectx/hidden/allEvents.php',
-	color: '#4793E6',
+	color: '#FF6600',
 	textColor: 'black',
 	type: 'POST',
 	error: function()
@@ -73,7 +73,7 @@ function searchEvents()
 		{
 		    squery: qString
 		}, 
-            color: '#4793E6',
+            color: '#FF6600',
             textColor: 'black'
         };
 

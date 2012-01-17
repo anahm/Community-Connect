@@ -6,13 +6,28 @@ HELLO PEOPLE THIS IS ALI AND SURY DOING WEIRD THINGS...BLARGL
     <head>
 	<title>SODAASN</title>
 	<link rel="stylesheet" href="css/styles.css" type="text/css">
-	<script type='text/javascript' src='qEvents.js'></script>
+	<link rel="stylesheet" href="jquery-ui-1.8.17.custom/css/ui-lightness/jquery-ui-1.8.17.custom.css"></script>
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
+	<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-1.7.1.min.js'></script>
+	<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-ui-1.8.17.custom.min.js'></script>
 
-   </head>
+
+	<script>
+	$(function() {
+		$( "input:submit, a, button", ".demo" ).button();
+		$( "a", ".demo" ).click(function() { return false; });
+	});
+	</script>
+
+    </head>
 
     <body>
-	
-	<img src="images/thirdpartyfacepalm.jpg" style="position: absolute; top: -1000px;">
+	<div class="demo">
+	    <button>A button element</button>
+	    <input type="submit" value="test button">
+	    <a href="#">An anchor</a>
+	</div>
+
 	blargl
 	<form name="newEvent">
 	    <input type="hidden" value="WILLHOLDGROUPIDNUMBER">
