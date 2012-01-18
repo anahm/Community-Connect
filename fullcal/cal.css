@@ -301,7 +301,7 @@ a.fc-event {
 .fc .ui-resizable-handle { /*** TODO: don't use ui-resizable anymore, change class ***/
 	display: block;
 	position: absolute;
-	z-index: 99999;
+	z-index: 5;
 	overflow: hidden; /* hacky spaces (IE6/7) */
 	font-size: 300%;  /* */
 	line-height: 50%; /* */

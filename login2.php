@@ -1,5 +1,4 @@
 <?
-    // require common code
     require_once("hidden/basic.php");
 
     // escape username to avoid SQL injection attacks
@@ -24,7 +23,7 @@
             $_SESSION["id"] = $row["userID"];
 
             // redirect to homepage
-            redirect("index.html");
+            redirect("index.php");
         }
     }
 

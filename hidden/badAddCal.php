@@ -11,28 +11,32 @@
 
     header('Content-Type:application/json');
 
-    require_once('auth.php');
+//    require_once('extraLogin.php');
+    require_once('google-api-php-read-only/src/apiClient.php');
+    require_once('google-api-php-read-only/src/contrib/apiCalendarService.php');
+
+    // standard creation of http client
+    $gdataCal = new Zend_Gdata_Calendar($client);
 
     try
     {
     	// get list of existing cal
-    	$calFeed = $servce->calendarList->listCalendarList();
+    	$calFeed = $gdataCal->getCalendarListFeed();
     }
     catch (Zend_Gdata_App_Exception $e)
     {
 	echo "Error: " . $e->getMessage();
     }
 
+    $noCal = true;
     $newName = $_POST['calName'];
 
-    while(true)
+    // loop through calendars and check names
+    foreach ($calFeed as $calendar)
     {
-	foreach ($calendarList->getItems() as $calendarListEntry)
+	if ($calendar->title->text == $newName)
 	{
-	    if ($calendar->title->text == $newName)
-	    {
-	    	$noCal = false;
-	    }
+	    $noCal = false;
 	}
     }
 
@@ -41,16 +45,28 @@
     // if name not found, create calendar
     if ($noCal)
     {
-	$newCal = new Calendar();
-	$newCal->setSummary($newName);
-	$bestCal = $service->calendars->insert($newCal);
-	$calID = $bestCal->getId();
+	$newCal = $gdataCal->newListEntry();
+	$newCal->title = $gdataCal->newTitle($newName);
+
+	// new url to post for new calendars
+	$own_cal = "http://www.google.com/calendar/feeds/default/owncalendars/full";
+
+	$bestCal = $gdataCal->insertEvent($newCal, $own_cal);
+
+	$pattern = '/(?<=http:\/\/www.google.com\/calendar\/feeds\/default\/owncalendars\/full\/)(.*)(\%40group.calendar.google.com)/';
+	$output = $bestCal->id->text;
+	$tempId_array = array();
+	preg_match_all($pattern, $output, $tempId_array);
+	$calID = $tempId_array[1][0];
+
+	// also need to add the special url
+	$calUrl = $bestCal->content->src;
 
 	// code to add the cal info to the calendars mysql table
 	require_once('basic.php');
 	$calName = mysql_real_escape_string($newName);
-	$calResult = mysql_query("INSERT INTO calendars (calName, gcalID)
-		VALUES ('$calName', '$calID')");
+	$calResult = mysql_query("INSERT INTO calendars (calName, gcalID, gcalUrl)
+		VALUES ('$calName', '$calID', '$calUrl')");
 	
 	if (!$calResult)
 	    apologize("sorry folks, can't add this calendar to the sql table.");	 

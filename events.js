@@ -12,7 +12,7 @@
 var allFeed = 
     {
     	url: 'http://www.hcs.harvard.edu/projectx/hidden/allEvents.php',
-	color: '#FF6600',
+	color: '#b2e0e0',
 	textColor: 'black',
 	type: 'POST',
 	error: function()
@@ -31,34 +31,20 @@ $(document).ready(function()
 	eventSources:
 	[
 	    allFeed
-	 /*   {
-		url: 'http://www.hcs.harvard.edu/projectx/hidden/allEvents.php',
-//		url: 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/?squery=cambridge',
-		type: 'POST',
-		error: function()
-		{
-		    alert('fail status. sorry, man.');
-		},
-	    } */
-	]
-/* extra stuff i don't really get.. 
+	],
 	eventClick: function(event)
 	{
+	    alert('oh hey there');
 	    // opens events in a popup window
-	    window.open(event.url, 'gcalevent', 'width=700, height=600');
+	    // window.open(event.url, 'gcalevent', 'width=700, height=600');
 	},
-
-	loading: function(bool)
+	editable: true,
+	header:
 	{
-	    if (bool)
-	    {
-		$('#loading').show();
-	    }
-	    else
-	    {
-		$('#loading').hide();
-	    }
-	} */
+	    left: 'prev,next today',
+	    center: 'title',
+	    right: 'month,agendaWeek,agendaDay'
+	}
     });
 });
 

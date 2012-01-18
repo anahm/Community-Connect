@@ -1,199 +1,129 @@
 <?
-    require_once('hidden/basic.php');
+	require_once('hidden/basic.php');
 ?>
 
 <!DOCTYPE html>
 
 <html>
 
-    <head>
-	<link rel='stylesheet' type='text/css' href='fullcal/cal.css'/>
-	<link rel="stylesheet" href="css/styles2.css" type="text/css">
-	<link rel="stylesheet" href="jquery-ui-1.8.17.custom/css/ui-lightness/jquery-ui-1.8.17.custom.css"></script>
-	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
-	<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-1.7.1.min.js'></script>
-	<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-ui-1.8.17.custom.min.js'></script>
+	<head>
+		<link rel="stylesheet" href="css/reset.css" type="text/css">
+		<link rel='stylesheet' type='text/css' href='fullcal/cal.css'/>
+		<link rel="stylesheet" href="css/styles2.css" type="text/css">
+		<link rel="stylesheet" href="jquery-ui-1.8.17.custom/css/ui-lightness/jquery-ui-1.8.17.custom.css"></script>
+		<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
+		<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-1.7.1.min.js'></script>
+		<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-ui-1.8.17.custom.min.js'></script>
 
-	<script type='text/javascript' src='fullcal/fullcalendar.min.js'></script>
+		<script type='text/javascript' src='fullcal/fullcalendar.min.js'></script>
 
-	<script type='text/javascript' src='events.js'></script>
-	<script type='text/javascript' src='post.js'></script>
+		<script type='text/javascript' src='events.js'></script>
+		<script type='text/javascript' src='post.js'></script>
 
-	<script>
-	$(function() {
-		$( "input:submit, a, button", ".demo" ).button();
-		$( "a", ".demo" ).click(function() { return false; });
-	});
-	</script>
-
-	<title>
-	    SODAASN (+ scott)
-	</title>
-    </head>
-
-    <body>
-	
-	<style>
-	.toggler { width: 500px; height: 200px; }
-	#button { padding: .5em 1em; text-decoration: none; }
-	#effect { width: 240px; height: 135px; padding: 0.4em; position: relative; }
-	#effect h3 { margin: 0; padding: 0.4em; text-align: center; }
-	</style>
-	<script>
-	$(function() {
-		// run the currently selected effect
-		function runEffect() {
-			// get effect type from 
-			var selectedEffect = "blind";
+		<script>
+			// sets the buttons for JQuery UI
+			$(function() {
+				$("button").button();
+			});
 			
-			// most effect types need no options passed by default
-			var options = {};
-			// some effects have required parameters
-			if ( selectedEffect === "scale" ) {
-				options = { percent: 0 };
-			} else if ( selectedEffect === "size" ) {
-				options = { to: { width: 200, height: 60 } };
+			// hide addEvent
+			$(function() {
+				$("#addEvent").hide();
+				$("#curtain").hide();
+			});
+			
+			// toggles addEvent page
+			function showAddEvent() {
+				$("#addEvent").animate({height: 'toggle'}, 600);
+				$("#curtain").toggle();
 			}
-			
-			// run the effect
-			$( "#effect" ).toggle( selectedEffect, options, 500 );
-		};
+		</script>
+
+		<title>
+			SODAASN (+ scott)
+		</title>
+	</head>
+
+	<body>
+		<div id="curtain" onclick="showAddEvent()" ></div>
+			<div id="addEvent" class="bubble">
+				<form name="newEvent" onsubmit="addEvent(); return false;" action="">
+				<input type="hidden" name="groupID" value="WILLHOLDGROUPIDNUMBER"> 
+					<table> 
+						<th>
+							<td colspan="2">ADD EVENT</td>
+						</th>
+						<tr> 
+							<td>Name:</td> 
+							<td><input name="name" type="text"></td> 
+						</tr>
+						<tr>
+							<td>Date:</td>
+							<!-- should probably make this into a jquery datepicker -->
+							<td><input name="date" type="text"></td>
+						</tr>
+						<tr>
+							<td>Location:</td>
+							<td><input name="location" type="text"></td>
+						</tr>
+						<tr>
+							<td>Time:</td>
+							<!-- could also make this better with jquery -->
+							<td><input name="time" type="text"></td> 
+						</tr>
+						<tr>
+							<td>Blurb!</td>
+							<td><input name="blurb" type="text"></td>
+						</tr>
+						<tr>
+							<td>Which calendar to add to?</td>
+							<td>
+								<select name="caldropdown">
+								<option>All Calendars You Can Add To</option>
+								<?
+								// need to get sql information
+								?>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Any tags?</td>
+							<td>Well too bad, because you can't tag right now.</td>
+						</tr>
+						<tr>
+							<td colspan="2"><input type="submit" value="ADD ME"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
 		
-		// set effect from select menu value
-		$( "#button" ).click(function() {
-			runEffect();
-			return false;
-		});
-	});
-	</script>
-
-
-
-<div class="demo">
-
-<div class="toggler">
-
-<a href="#" id="button" class="ui-state-default ui-corner-all">Run Effect</a>
-	<div id="effect">
-		<div id="addEvent" class="bubble">
-			<form name="newEvent" onsubmit="addEvent(); return false;" action="">
-			<input type="hidden" name="groupID" value="WILLHOLDGROUPIDNUMBER"> 
-			<table> 
-				<th>
-				<td colspan="2">ADD EVENT</td>
-				</th>
-				<tr> 
-				<td>Name:</td> 
-				<td><input name="name" type="text"></td> 
-				</tr>
-				<tr>
-				<td>Date:</td>
-				<!-- should probably make this into a jquery datepicker -->
-				<td><input name="date" type="text"></td>
-				</tr>
-				<tr>
-				<td>Location:</td>
-				<td><input name="location" type="text"></td>
-				</tr>
-				<tr>
-				<td>Time:</td>
-				<!-- could also make this better with jquery -->
-				<td><input name="time" type="text"></td> 
-				</tr>
-				<tr>
-				<td>Blurb!</td>
-				<td><input name="blurb" type="text"></td>
-				</tr>
-				<tr>
-				<td>Which calendar to add to?</td>
-				<td>
-					<select name="caldropdown">
-					<option>All Calendars You Can Add To</option>
-					<?
-					// need to get sql information
-					?>
-					</select>
-				</td>	
-				</tr>
-				<tr>
-				<td>Any tags?</td>
-				<td>Well too bad, because you can't tag right now.</td>
-				</tr>
-				<tr>
-				<td colspan="2"><input type="submit" value="ADD ME"></td>
-				</tr>
-			</table>
-			</form>
+		<div id='home'>
+			<b>Home</b>
+			<b>Sign Out</b>
 		</div>
-	</div>
-</div>
-
-</div><!-- End demo -->
-
-
-
-<div class="demo-description" style="display: none; ">
-<p>Click the button above to preview the effect.</p>
-</div><!-- End demo-description -->
 	
-	<div id='home'>
-		<b>Home</b>
-		<b>Sign Out</b>
-	</div>
-	
-	<div id='header'>
-   	    Welcome Project X!
-	</div>
-
-	<div class="demo">
-		<button>Add Event</button>
-		<button>Search</button>
-		<button>Make Calendar</button>
-	</div>
-	
-	<div>
+		<div id='header'>
+			Welcome Project X!
+		</div>
 		
-		
-		<div id="right">
-			<div id='lowerleft' class="bubble">
-				<form name="qform" onsubmit="searchEvents(); return false;"  action="">
-				<table>
-					<tr>
-					<td>I want a calendar that has:</td>
-					<td><input name="squery" type="text" value=""></td>
-					</tr>
-					<tr>
-					<td colspan="2">
-						<input type="submit" name="button" value="SEARCH">
-					</td>
-					</tr>
-				</table>
-				</form>
-			
-				<form name="newCal" onsubmit="addCal(); return false;" action="">
-				<input name="userID" type="hidden" value="useridneedstogohere">
-				<table>
-					<tr>
-					<th colspan="2">Make-Your-Own</th>
-					</tr>
-					<tr>
-					<td>Calendar Name:</td>
-					<td><input name="calName" type="text" value=""></td>
-					</tr>
-					<tr>
-					<td colspan="2"><input type="submit" name="button" value="MAKE"></td>
-					</tr>
-				</table>
-				</form>
-			</div> 
-			
-			<div id='calendar' class="bubble">
+		<div style="display: block;">
+			<div id='menu' class="bubble">
+				<div id='yourCalendars' style="background-color: #969696; width: 100%;">
+					Your Calendars:
+				</div>
 			</div>
 			
+			<div id="calContainer">
+				<div id="buttons" class="bubble">
+					<button onclick="showAddEvent()">Add Event</button>
+					<button>Search</button>
+					<button>Make Calendar</button>
+				</div>
+				<div class="bubble">
+					<div id='calendar'>
+					</div>
+				</div>
+			</div>
 		</div>
-
-    </div>
-	
 	</body>
-
 </html>

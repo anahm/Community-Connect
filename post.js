@@ -13,36 +13,37 @@ function addCal()
 	    var tempCrap = JSON.stringify(data);
 	    alert(tempCrap);
 	});
-
-    
-    document.newCal.calName.value = "";
-
     
 }
 
 function addEvent()
 {
+    alert("oh hey the first time");
+
     var newName = document.newEvent.name.value;
-    var newDate = document.newEvent.date.value;
+    var startDate = document.newEvent.sdate.value;
+    var endDate = document.newEvent.edate.value;
     var newLoc = document.newEvent.location.value;
-    var newTime = document.newEvent.time.value;
+    var startTime = document.newEvent.stime.value;
+    var endTime = document.newEvent.etime.value;
     var newBlurb = document.newEvent.blurb.value;
-    // var newCal = document.
+    var newCalIndex = document.getElementById("caldropdown").selectedIndex;
+    var newCalArray = document.getElementById("caldropdown").options;
+    var newCal = newCalArray[newCalIndex].text;
 
     $.post("hidden/addEvent.php",
 	{
 	    name: newName,
-	    date: newDate,
+	    sdate: startDate,
+	    edate: endDate,
 	    location: newLoc,
-	    time: newTime,
+	    stime: startTime,
+	    etime: endTime,
 	    blurb: newBlurb,
-//	    cal: newCal
+	    cal: newCal
 	});
-
-    document.newEvent.name.value = "";
-    document.newEvent.date.value = "";
-    document.newEvent.location.value = "";
-    document.newEvent.time.value = "";
-    document.newEvent.blurb.value = "";
- //   document.
+    
+    document.newEvent.reset();
+    alert("oh hey there");
 }
+
