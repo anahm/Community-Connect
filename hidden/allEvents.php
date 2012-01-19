@@ -1,28 +1,33 @@
 <?
+    /*
+	viewEvents.php
+
+	1.18.12
+	prints everything
+    */
+
+
     header('Content-Type:application/json');
 
-    require_once ('auth.php');
-
-    $events = $service->events->listEvents('primary');
+    require_once('basic.php');
 
     $event_array = array();
 
-    while(true) 
+    // execute sql query to print all events in calendar
+    $event_sql = "SELECT * FROM events";
+    $event_result = mysql_query($event_sql);
+    while ($event_row = mysql_fetch_array($event_result))
     {
-  	foreach ($events->getItems() as $event) 
-	{
-	    // can probably add in event url to link it and event location..
-	    $event_array[] = array(
-	    	'id' => $event->getId(),
-	   	'title' => $event->getSummary(),
-	  	'content' => $event->getDescription(),
-	  	'location' => $event->getLocation(),
-	 	'start' => $event->getDateTime(),
-	 	'end' => $event->getDateTime()
+	$event_array[] = array(
+		'id' => $event_row['eventID'],
+		'title' => $event_row['title'],
+		'content' => $event_row['description'],
+		'start' => $event_row['sDateTime'],
+		'end' => $event_row['eDateTime']
 	    );
-	}
     }
 
     echo json_encode($event_array);
 
 ?>
+    

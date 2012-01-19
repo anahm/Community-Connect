@@ -10,6 +10,7 @@
     */
 
     require_once('basic.php');
+    require_once('extraMethods.php');
 
     // validate submission
     /* if ((empty($_POST['title'])) || (empty($_POST['cal']))
@@ -19,37 +20,22 @@
     	exit;
     } */
 
-    // date is coming in as mm/dd/yyyy
     $sDate = mysql_real_escape_string($_POST['sdate']);
-    $dateArray = explode('/', $sDate);
-    $month = $dateArray[0];
-    $date = $dateArray[1];
-    $year = $dateArray[2];
-    $sDate = $year . '-' . $month . '-' . $date;
-
     $sTime = mysql_real_escape_string($_POST['stime']);
 
     // create start and end datetimes
-    $start = $sDate . ' ' . $sTime;
+    $start = $sDate . $sTime;
 
     if (empty($_POST['edate']))
  	$eDate = $sDate;
     else
-    {
 	$eDate = mysql_real_escape_string($_POST['edate']);
-	$dateArray = explode('/', $eDate);
-    	$month = $dateArray[0];
-    	$date = $dateArray[1];
-    	$year = $dateArray[2];
-    	$eDate = $year . '-' . $month . '-' . $date;
-    }
-
     if (empty($_POST['etime']))
 	$eTime = $sTime + 3600;
     else
 	$eTime = mysql_real_escape_string($_POST['etime']);
 
-    $end = $eDate . ' ' . $eTime;
+    $end = $eDate . $eTime;
 
     $calId = '';
     if (!(empty($_POST['cal'])))

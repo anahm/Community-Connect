@@ -2,19 +2,144 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
   <title>jQuery timePicker</title>
- <style type="text/css" media="all">@import "timePicker.css";</style>
-  
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-  <script type="text/javascript" src="js/timePicker.js"></script>
+	<link rel="stylesheet" href="jquery-ui-1.8.17.custom/css/ui-lightness/jquery-ui-1.8.17.custom.css" />
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
+	<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-1.7.1.min.js'></script>
+	<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-ui-1.8.17.custom.min.js'></script>
 	
-	<script type="text/javascript" src="scott.js"></script>
+	<style>
+		.ui-autocomplete {
+			max-height: 100px;
+			overflow-y: auto;
+			/* prevent horizontal scrollbar */
+			overflow-x: hidden;
+			/* add padding to account for vertical scrollbar */
+			padding-right: 20px;
+		}
+		/* IE 6 doesn't support max-height
+		* we use height instead, but this forces the menu to always be this tall
+		*/
+		* html .ui-autocomplete {
+			height: 100px;
+		}
+	</style>
+	<script>
+	$(function() {
+		var availableTags = [
+			"12:00AM", 
+			"12:15AM", 
+			"12:30AM", 
+			"12:45AM", 
+			"01:00AM", 
+			"01:15AM", 
+			"01:30AM", 
+			"01:45AM", 
+			"02:00AM", 
+			"02:15AM", 
+			"02:30AM", 
+			"02:45AM", 
+			"03:00AM", 
+			"03:15AM", 
+			"03:30AM", 
+			"03:45AM", 
+			"04:00AM", 
+			"04:15AM", 
+			"04:30AM", 
+			"04:45AM", 
+			"05:00AM", 
+			"05:15AM", 
+			"05:30AM", 
+			"05:45AM", 
+			"06:00AM", 
+			"06:15AM", 
+			"06:30AM", 
+			"06:45AM", 
+			"07:00AM", 
+			"07:15AM", 
+			"07:30AM", 
+			"07:45AM", 
+			"08:00AM", 
+			"08:15AM", 
+			"08:30AM", 
+			"08:45AM", 
+			"09:00AM", 
+			"09:15AM", 
+			"09:30AM", 
+			"09:45AM", 
+			"10:00AM", 
+			"10:15AM", 
+			"10:30AM", 
+			"10:45AM", 
+			"11:00AM", 
+			"11:15AM", 
+			"11:30AM", 
+			"11:45AM", 
+			"12:00PM", 
+			"12:15PM", 
+			"12:30PM", 
+			"12:45PM", 
+			"01:00PM", 
+			"01:15PM", 
+			"01:30PM", 
+			"01:45PM", 
+			"02:00PM", 
+			"02:15PM", 
+			"02:30PM", 
+			"02:45PM", 
+			"03:00PM", 
+			"03:15PM", 
+			"03:30PM", 
+			"03:45PM", 
+			"04:00PM", 
+			"04:15PM", 
+			"04:30PM", 
+			"04:45PM", 
+			"05:00PM", 
+			"05:15PM", 
+			"05:30PM", 
+			"05:45PM", 
+			"06:00PM", 
+			"06:15PM", 
+			"06:30PM", 
+			"06:45PM", 
+			"07:00PM", 
+			"07:15PM", 
+			"07:30PM", 
+			"07:45PM", 
+			"08:00PM", 
+			"08:15PM", 
+			"08:30PM", 
+			"08:45PM", 
+			"09:00PM", 
+			"09:15PM", 
+			"09:30PM", 
+			"09:45PM", 
+			"10:00PM", 
+			"10:15PM", 
+			"10:30PM", 
+			"10:45PM", 
+			"11:00PM", 
+			"11:15PM", 
+			"11:30PM", 
+			"11:45PM"
+		];
+		$( "#tags" ).autocomplete({
+			source: availableTags,
+			delay: 0, 
+			minLength: 0
+		});
+	});
+	</script>
 </head>
 
 <body>
+	<div class="demo">
 
-<div>
-	<input type="text" name="startTime" id="time1" />
-</div>
+		<div class="ui-widget">
+			<label for="tags">Tags: </label>
+			<input id="tags" />
+		</div>
 
+	</div>
 </body>
 </html>

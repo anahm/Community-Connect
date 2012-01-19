@@ -8,18 +8,12 @@
 function addCal()
 {
     var newName = document.newCal.calName.value;
-    $.post("http://www.hcs.harvard.edu/projectx/hidden/badAddCal.php", {calName: newName}, function(data)
-	{
-	    var tempCrap = JSON.stringify(data);
-	    alert(tempCrap);
-	});
-    
+    $.post("http://www.hcs.harvard.edu/projectx/hidden/addCal.php", {calName: newName});
+    document.newCal.reset(); 
 }
 
 function addEvent()
 {
-    alert("oh hey the first time");
-
     var newName = document.newEvent.name.value;
     var startDate = document.newEvent.sdate.value;
     var endDate = document.newEvent.edate.value;
@@ -41,14 +35,7 @@ function addEvent()
 	    etime: endTime,
 	    blurb: newBlurb,
 	    cal: newCal
-	},
-	function(data)
-	{
-	    var tempCrap = JSON.stringify(data);
-	    alert(tempCrap);
-	});
-    
+	});    
     document.newEvent.reset();
-    alert("oh hey there");
 }
 

@@ -11,64 +11,32 @@
 
     header('Content-Type:application/json');
 
-    require_once('auth.php');
-
-    try
-    {
-    	// get list of existing cal
-    	$calFeed = $servce->calendarList->listCalendarList();
-    }
-    catch (Zend_Gdata_App_Exception $e)
-    {
-	echo "Error: " . $e->getMessage();
-    }
+    require_once('basic.php');
 
     $newName = $_POST['calName'];
 
-    while(true)
-    {
-	foreach ($calendarList->getItems() as $calendarListEntry)
-	{
-	    if ($calendar->title->text == $newName)
-	    {
-	    	$noCal = false;
-	    }
-	}
-    }
-
-    $cal_array = array();
-
-    // if name not found, create calendar
-    if ($noCal)
-    {
-	$newCal = new Calendar();
-	$newCal->setSummary($newName);
-	$bestCal = $service->calendars->insert($newCal);
-	$calID = $bestCal->getId();
-
-	// code to add the cal info to the calendars mysql table
-	require_once('basic.php');
-	$calName = mysql_real_escape_string($newName);
-	$calResult = mysql_query("INSERT INTO calendars (calName, gcalID)
-		VALUES ('$calName', '$calID')");
+    // code to add the cal info to the calendars mysql table
+    $calName = mysql_real_escape_string($newName);
+    $calResult = mysql_query("INSERT INTO calendars (calName)
+	VALUES ('$calName')");
 	
-	if (!$calResult)
-	    apologize("sorry folks, can't add this calendar to the sql table.");	 
+    if (!$calResult)
+        apologize("sorry folks, can't add this calendar to the sql table.");	 
 
-	// code to add to writers table
-	$uID = $_SESSION["id"];
+    // code to add to writers table
+    $uID = $_SESSION["id"];
 
-	// need to get the sql stored calendar id
-	$tempResult = mysql_query("SELECT calID FROM calendars WHERE calName='$calName'");
-	if (mysql_num_rows($tempResult) == 1)
-	{
-	    $row = mysql_fetch_array($tempResult);
-	    $sqlCalID = $row['calID'];  
-	    $writeResult = mysql_query("INSERT INTO writers (userID, calID)
-		VALUES ('$uID', '$sqlCalID')");	
+    // need to get the sql stored calendar id
+    $tempResult = mysql_query("SELECT calID FROM calendars WHERE calName='$calName'");
+    if (mysql_num_rows($tempResult) == 1)
+    {
+        $row = mysql_fetch_array($tempResult);
+        $sqlCalID = $row['calID'];  
+        $writeResult = mysql_query("INSERT INTO writers (userID, calID)
+    	    VALUES ('$uID', '$sqlCalID')");	
 
-	    if ($writeResult)
-	    	apologize("sorry folks, can't add this calendar to writers sql table.");
-	}
+	if ($writeResult)
+      	    apologize("sorry folks, can't add this calendar to writers sql table.");
     }
+    
 ?> 
