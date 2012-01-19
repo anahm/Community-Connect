@@ -11,7 +11,7 @@
 
 var allFeed = 
     {
-    	url: 'http://www.hcs.harvard.edu/projectx/hidden/allEvents.php',
+    	url: 'http://www.hcs.harvard.edu/projectx/hidden/badAllEvents.php',
 	color: '#b2e0e0',
 	textColor: 'black',
 	type: 'POST',

@@ -1,7 +1,7 @@
 <?
 
-    require_once('google-api-php-read-only/src/apiClient.php');
-    require_once('google-api-php-read-only/src/contrib/apiCalendarService.php');
+    require_once('google-api-php-client-read-only/src/apiClient.php');
+    require_once('google-api-php-client-read-only/src/contrib/apiCalendarService.php');
 
     $apiClient = new apiClient();
     $apiClient->setUseObjects(true);

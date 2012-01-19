@@ -8,15 +8,15 @@
 <html>
 
     <head>
+	<link rel='stylesheet' type='text/css' href='css/reset.css'/>
 	<link rel='stylesheet' type='text/css' href='fullcal/cal.css'/>
-	<link rel='stylesheet' type='text/css' href='css/styles.css' />
-<link rel='stylesheet' type='text/css' href='jquery-ui-1.8.17.custom/css/ui-lightness/jquery-ui-1.8.17.custom.css' />
-<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
-<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-1.7.1.min.js'></script>
-<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-ui-1.8.17.custom.min.js'></script>
-
+	<link rel='stylesheet' type='text/css' href='css/styles2.css' />
+	<link rel='stylesheet' type='text/css' href='jquery-ui-1.8.17.custom/css/ui-lightness/jquery-ui-1.8.17.custom.css' />
+	<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js'></script>
+	<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-1.7.1.min.js'></script>
+	<script type='text/javascript' src='jquery-ui-1.8.17.custom/js/jquery-ui-1.8.17.custom.min.js'></script>
 	<script type='text/javascript' src='fullcal/fullcalendar.min.js'></script>
-
+	<script type='text/javascript' src='functions.js'></script>
 	<script type='text/javascript' src='events.js'></script>
 	<script type='text/javascript' src='post.js'></script>
 
@@ -26,23 +26,31 @@
     </head>
 
     <body>
-	
-	<div id='home'>
-		<b>Home</b>
-		<b>Sign Out</b>
+
+	<div id="curtain" onclick="showAddEvent()" >
 	</div>
-	
-	<div id='header'>
-   	    Welcome Project X!
-	</div>
-	
-	<div>
-		
-		<div id="addEvent" class="bubble">
-			<form name="newEvent" onsubmit="addEvent(); return false;" action="">
-			<table> 
-		     	    <th>
-				<td colspan="2">ADD EVENT</td>
+        <div id="add-dialog" title="Add Event">
+            <form>
+                <fieldset>
+                    <label for="name">Name</label>
+                        <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
+                        <label for="date">Date</label>
+                        <input type="text" name="date" id="datepicker">
+                        <label for="location">Location</label>
+                        <input type="text" name="location" id="location" class="text ui-widget-content ui-corner-all" />
+                        <label for="time">Time</label>
+                        <input type="text" name="time" id="time" class="text ui-widget-content ui-corner-all" />
+                        <label for="blurb">Blurb</label>
+                        <input type="text" name="blurb" id="blurb" class="text ui-widget-content ui-corner-all" />
+                    <label for="calendar">Calendar</label>
+       	   	</fieldset>
+   	    </form>
+        </div>
+	<div id="addEvent" class="bubble">
+    	    <form name="newEvent" onsubmit="addEvent(); return false;" action="">
+		<table> 
+	    	    <th>
+			<td colspan="2">ADD EVENT</td>
 			    </th>
 				<tr> 
 				<td>Name:</td> 
@@ -108,6 +116,15 @@
 			</form>
 		</div>
 		
+                <div id='home'>
+                        <b>Home</b>
+                        <b>Sign Out</b>
+                </div>
+
+                <div id='header'>
+                        Welcome Project X!
+                </div>
+
 		<div id="right">
 			<div id='lowerleft' class="bubble">
 				<form name="qform" onsubmit="searchEvents(); return false;"  action="">
