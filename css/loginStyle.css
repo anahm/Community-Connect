@@ -8,5 +8,60 @@
 
 body
 {
-	background-image: url('../images/arrow.png');
+  background: #FFFFFF;
+  
 }
+
+#parent
+{
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 150px;
+}
+
+img#test
+{
+  z-index: 1;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bubble
+{
+  display: inline-block;
+}
+
+th
+{
+  font-size: 30px;
+  padding: 3px 3px 10px 3px;
+}
+
+td
+{
+  padding: 3px;
+}
+
+#input
+{
+	font-family: Calibri, Verdana, Ariel, sans-serif;
+	border: 3px solid rgba(127, 127, 127, 1.0);
+	border-radius: 25px;
+	background-color: rgba(193, 205, 205, 0.8);
+	padding: 15px 15px 15px 15px;
+	display: table;
+  margin: -200px auto auto auto;
+  z-index: 2;
+  position: relative;
+} 
+
+/*
+form > label, form > input
+{
+	display: block;
+	margin: 5px 0px 5px 0px;
+  z-index: 2;
+}
+
+*/
