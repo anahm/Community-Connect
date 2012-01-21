@@ -9,7 +9,10 @@
 body
 {
   background: #FFFFFF;
-  
+  background-image: url("../images/bluerectangle.png");
+  background-position: center;
+  display: block;
+  background-repeat: repeat-y;
 }
 
 #parent
@@ -21,7 +24,7 @@ body
 
 img#test
 {
-  z-index: 1;
+  z-index: 2;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -52,16 +55,6 @@ td
 	padding: 15px 15px 15px 15px;
 	display: table;
   margin: -200px auto auto auto;
-  z-index: 2;
+  z-index: 3;
   position: relative;
 } 
-
-/*
-form > label, form > input
-{
-	display: block;
-	margin: 5px 0px 5px 0px;
-  z-index: 2;
-}
-
-*/

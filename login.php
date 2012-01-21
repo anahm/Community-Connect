@@ -41,6 +41,9 @@
 
   <body>
       <img src="images/loginyo.png" alt="Welcome!" id="test"/>
+
+  <div id="repeat"> </div>
+
   <div id="parent">
     <div id="input">
       <form action="login2.php" method="post">
