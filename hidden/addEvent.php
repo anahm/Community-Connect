@@ -20,22 +20,36 @@
     	exit;
     } */
 
+    // getting date from mm/dd/yyyy to yyyy-mm-dd
     $sDate = mysql_real_escape_string($_POST['sdate']);
+    $sArray = explode('/', $sDate);
+    $sDate = $sArray[2] . '-' . $sArray[0] . '-' . $sArray[1];
+
     $sTime = mysql_real_escape_string($_POST['stime']);
 
     // create start and end datetimes
-    $start = $sDate . $sTime;
+    $start = $sDate . ' ' . $sTime;
 
     if (empty($_POST['edate']))
- 	$eDate = $sDate;
+    {
+      $eDate = $sDate;
+    }
     else
-	$eDate = mysql_real_escape_string($_POST['edate']);
+    {
+      $eDate = mysql_real_escape_string($_POST['edate']);
+    }
     if (empty($_POST['etime']))
-	$eTime = $sTime + 3600;
+    {
+      $eTime = $sTime + 3600;
+    }
     else
-	$eTime = mysql_real_escape_string($_POST['etime']);
+    {
+      $eTime = mysql_real_escape_string($_POST['etime']);
+      $eArray = explode('/', $eDate);
+      $eDate = $eArray[2] . '-' . $eArray[0] . '-' . $eArray[1];
+    }
 
-    $end = $eDate . $eTime;
+    $end = $eDate . ' ' . $eTime;
 
     $calId = '';
     if (!(empty($_POST['cal'])))

@@ -50,23 +50,23 @@ $(document).ready(function()
 
 function searchEvents()
 {
-    var qString = document.qform.squery.value;
+    var qString = document.qform.query.value;
     var tempFeed = 
 	{
-            url: 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/',
+        url: 'http://www.hcs.harvard.edu/projectx/hidden/queryEvents.php/',
 	    type: 'GET',
 	    data:
 		{
-		    squery: qString
+		    query: qString
 		}, 
-            color: '#FF6600',
-            textColor: 'black'
-        };
+    	color: '#b2e0e0',
+        textColor: 'black'
+    };
 
     $('#calendar').fullCalendar('removeEventSource', currentFeed);
     $('#calendar').fullCalendar('addEventSource', tempFeed);
     $('#calendar').fullCalendar('refetchEvents');
 
-    document.qform.squery.value = "";
+    document.qform.query.value = "";
     currentFeed = tempFeed;
 }

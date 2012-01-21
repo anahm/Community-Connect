@@ -1,55 +1,77 @@
-<?
-    /*
-     * hcs.harvard.edu/hidden/queryEvents.php
-     *
-     * Project X - 1.13.12 (friday the thirteenth!)
-     *
-     * prints specifically queried information
-     */
+<?  
+  /*
 
-    header('Content-Type:application/json');
+    queryEvents.php
 
-    require_once 'extraLogin.php';
+    search for events containing a specific word
+    specifically in title, description, location
 
-    $service = new Zend_Gdata_Calendar($client);
-    $query = $service->newEventQuery();
-   
-    $query->setUser('default');
-    $query->setVisibility('private');
-    $query->setOrderby('starttime');
+  */
 
-    $query->setQuery($_GET['squery']);
+header('Content-Type:application/json'); 
 
-    // retrieve the event list from calendar server
-    try
+require_once('basic.php'); 
+
+if (empty($_GET['query'])) 
+  apologize("Invalid query.");
+
+$qString = mysql_real_escape_string($_GET['query']);
+
+// making sql request to events table to query
+$query_sql = "SELECT * FROM events
+  WHERE MATCH (title, location, description)
+  AGAINST ('$qString' IN BOOLEAN MODE)";
+$query_result = mysql_query($query_sql);
+
+// creating array to store valid events
+$event_array = array();
+
+while ($query_row = mysql_fetch_array($query_result))
+{
+  $event_array[] = array(
+    'id' => $query_row['eventID'],
+    'title' => $query_row['title'],
+    'content' => $query_row['description'],
+    'start' => $query_row['sDateTime'],
+    'end' => $query_row['eDateTime']
+  );
+}
+
+// if there are actually things in the array
+if (!empty($event_array))
+{
+  // add the new queried cal to calendars table
+  $cal_sql = "INSERT INTO calendars (calName, query)
+    VALUES ('$qString', 1)";
+  $cal_result = mysql_query($cal_sql);
+  // if insert fails, error is reported
+  if (!$cal_result)
+    echo ("Cannot add calendar!");
+
+  // also add new queried cal to readers table
+  else
+  {
+    // if logged in, save calendar to readers table 
+    if (!empty($_SESSION['id']))
     {
-	$eventFeed = $service->getCalendarEventFeed($query);
-    }
-    catch (Zend_Gdata_App_Exception $e)
-    {
-	echo "Error: " . $e->getMessage();
-    }
+      $uID = $_SESSION['id'];
+      $calID = mysql_insert_id();
 
-    $event_array = array();
+      $read_sql = "INSERT INTO readers (userID, calID)
+        VALUES ('$uID', '$calID')";
+      $read_result = mysql_query($read_sql);
+      
+      // if insert fails, error is reported
+      if (!$read_result)
+        echo ("Cannot add to readers table.");
+    }   
+  }
 
-    foreach ($eventFeed as $event)
-    {
-	foreach ($event->when as $when)
-	{
-	    $eventStart = $when->startTime;
-	    $eventEnd = $when->endTime;
-	}
+  echo json_encode($event_array);
+}
+else
+{
+  // iono what to put here
+}
 
-	// can probably add in event url to link it and event location..
-	$event_array[] = array(
-	    'id' => $event->id->text,
-	    'title' => $event->title->text,
-	    'content' => $event->content->text,
-	    'start' => $eventStart,
-	    'end' => $eventEnd,
-	);
-    }
-
-    echo json_encode($event_array);
 ?>
-

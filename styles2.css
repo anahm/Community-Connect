@@ -20,13 +20,6 @@ body
 	background-color: rgba(193, 205, 205, 0.8);
 	margin: 15px 10px 15px 10px;
 	padding: 5px 5px 5px 5px;
-	display: table;
-}
-
-form > label, form > input
-{
-	display: block;
-	margin: 5px 0px 5px 0px;
 }
 
 #submitSearch
@@ -41,7 +34,7 @@ div#home
 	font-size: 24px;
 	color: #484A4C;
 	width: 100%;
-	text-align: right;
+	text-align: left;
 }
 
 div#header
@@ -55,12 +48,6 @@ div#header
 }
 
 div#buttons
-{
-	width: 600px;
-	text-align: center;
-}
-
-div#searchEvent2
 {
 	width: 600px;
 	text-align: center;

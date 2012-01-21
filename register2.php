@@ -27,7 +27,7 @@
     $_SESSION["id"] = $id;
 
     // redirect to portfolio
-    redirect("index.html");
+    redirect("index.php");
 
 ?>
 

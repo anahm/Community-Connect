@@ -5,6 +5,14 @@
  * functions to make POST requests to specific urls
  */
 
+function viewCal()
+{
+    // need to get the calID or name from the button
+    var newCal = document.viewCal.button.value;
+    $.post("http://www.hcs.harvard.edu/projectx/hidden/calEvents.php",
+	{calID: newCal});
+}
+
 function addCal()
 {
     var newName = document.newCal.calName.value;
@@ -37,5 +45,8 @@ function addEvent()
 	    cal: newCal
 	});    
     document.newEvent.reset();
+
+    $('#calendar').fullCalendar('refetchEvents');
 }
+
 
