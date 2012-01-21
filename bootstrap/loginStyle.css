@@ -50,9 +50,9 @@ td
 #input
 {
 	font-family: Calibri, Verdana, Ariel, sans-serif;
-	border: 4px solid rgba(148, 148, 148, 1.0);
+	border: 5px solid rgba(148, 148, 148, 1.0);
 	border-radius: 30px;
-	background-color: rgba(171, 218, 232, 1.0);
+	background-color: rgba(188, 228, 238, 1.0);
 	padding: 15px 15px 15px 15px;
 	display: table;
   margin: -200px auto auto auto;

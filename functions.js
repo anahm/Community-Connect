@@ -34,7 +34,7 @@ $(function() {
 		autoOpen: false,
 		height: 600, 
 		width: 250, 
-		modal: true, 
+    	modal: true, 
 		buttons: {
 			"Add Event": function() {
 				var newName = document.getElementById("name").value;
@@ -87,4 +87,5 @@ $(function() {
 	$("#search_button").click(function() {
 		$("#searchEvent").dialog("open");
 	});
+
 });

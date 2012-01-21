@@ -112,5 +112,7 @@
 				</div>
 			</div>
 		</div>
+    <div id="eventDetails">
+    </div>
 	</body>
 </html>

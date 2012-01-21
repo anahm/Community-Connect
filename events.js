@@ -29,14 +29,66 @@ $(document).ready(function()
     {
 	// php projectx data
 	eventSources:
-	[
-	    allFeed
-	],
+	[ allFeed ],
 	eventClick: function(event)
-	{
-	    alert('oh hey there');
-	    // opens events in a popup window
-	    // window.open(event.url, 'gcalevent', 'width=700, height=600');
+	{ 
+        var printString = "<h2> Event Information </h2>";
+        printString = printString + "<br>";
+        printString = printString + "Title: " + event.title + "<br>";
+        
+        // changing date format - SCOTT FIX ITTTTTTTT (please)
+        var startDate = new Date(event.start);
+        var month = startDate.getMonth();
+        var day = startDate.getDate();
+        var year = startDate.getYear();
+        var hour = startDate.getHours();
+        var min = startDate.getMinutes();
+        printString = printString + "Start: " + month + " " + day + ", " + year
+            + " " + hour + ":" + min + "<br>";
+        // changing end date format
+        var endDate = new Date(event.end);
+        var month = endDate.getMonth();
+        var day = endDate.getDate();
+        var year = endDate.getYear();
+        var hour = endDate.getHours();
+        var min = endDate.getMinutes();
+        printString = printString + "End: " + month + " " + day + ", " + year
+            + " " + hour + ":" + min + "<br>";
+       
+        if (event.location)
+            printString = printString + "Location: " + event.location + "<br>";
+        if (event.content)
+            printString = printString + "Description: " + event.content;
+
+        $('#eventDetails').html(printString);
+
+	    $(function() {
+          $("#eventDetails").dialog({
+		    autoOpen: true,
+		    width: 350, 
+	        modal: true, 
+		    buttons: {
+                // depending on the type of calendar...all need to redirect to
+                // a php file...
+                //
+                // NEED TO SAVE THE CALENDAR TYPE IN A SESSION VARIABLE
+                // OR SOMETHING
+                //
+                // BLARGL 
+                // 
+                // if writer calendar 
+                // "Update": function() {},
+                // "Delete": function() {},
+                // else if an event in saved viewer calendar
+                // "Remove": function() {},
+                // else if an event in recently searched calendar
+                // "Add": function() {},
+			    "Submit": function() {}, 
+			    "Cancel": function() { $(this).dialog("close"); }
+            }, 
+		    close: function() { allFields.val("").removeClass("ui-state-error"); }
+	      })
+        });
 	},
 	editable: true,
 	header:
