@@ -19,7 +19,7 @@
     while ($event_row = mysql_fetch_array($event_result))
     {
 	$event_array[] = array(
-		'id' => $event_row['eventID'],
+		'id' => $event_row['event_id'],
 		'title' => $event_row['title'],
 		'content' => $event_row['description'],
 		'start' => $event_row['sDateTime'],

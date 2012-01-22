@@ -103,3 +103,10 @@ div#calendar
 	width: 600px;
 	height: 400px;
 }
+
+div#demoTools
+{
+	position: absolute;
+	left: 925px;
+	top: 80px;
+}

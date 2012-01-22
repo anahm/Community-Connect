@@ -31,3 +31,13 @@
     apologize("Invalid username and/or password!");
 
 ?>
+
+<script type='text/javascript' src='events.js'></script>
+<script type='text/javascript'>
+    // need to change view attribute of currentFeed
+    $(document).ready(function()
+    {
+        currentFeed['view'] = 'READ';
+        alert(currentFeed['view']);
+    }
+</script>
